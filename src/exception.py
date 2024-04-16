@@ -35,10 +35,10 @@ class CustomException(Exception):
 
 
 
-if __name__ == '__main__':
-    try:
-        a=1/0
+# if __name__ == '__main__':
+#     try:
+#         a=1/0
 
-    except Exception as e:
-        logging.info(e)
-        raise CustomException(e,sys)
+#     except Exception as e:
+#         logging.info(e)
+#         raise CustomException(e,sys)
