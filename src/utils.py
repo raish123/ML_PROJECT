@@ -1,0 +1,1 @@
+#in utils.py file we r writing code in a such way that it provide functionality to our  entire application
