@@ -4,5 +4,7 @@ scikit-learn
 matplotlib
 seaborn
 flask
--e . 
+pymysql
+python-dotenv
+#-e . 
 #indicate single line command means to execute
