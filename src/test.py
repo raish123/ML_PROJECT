@@ -1,12 +1,9 @@
-from src.utils import read_data_sql
-import pandas as pd,numpy as np
-from sklearn.model_selection import train_test_split
 import os,sys
 from src.logger import logging
 from src.exception import CustomException
-from src.utils import read_data_sql
 from src.components.data_ingestion import  DataIngestion,DataIngestionConfig
 from src.components.data_transformation import  DataTransformation,DataTransformationConfig
+from src.components.model_trainer import  ModelTrainer,ModelTrainerConfig
 
 def main():
     # Call the read_data_sql function to load the DataFrame
@@ -18,8 +15,13 @@ def main():
 
     #creating an object data transformation
     dt = DataTransformation()
-    print(dt.initiate_data_transformation(raw_path,train_path,test_path))
+    train_arr,test_arr,processor_path = dt.initiate_data_transformation(raw_path,train_path,test_path)
     
+
+    mt = ModelTrainer()
+    s = mt.initiate_model_trainer(train_arr,test_arr,processor_path)
+    print(s)
+
     # Print the DataFrame to check if it loaded correctly
     #print(df)
 
