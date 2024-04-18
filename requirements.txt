@@ -6,5 +6,6 @@ seaborn
 flask
 pymysql
 python-dotenv
+dill
 #-e . 
 #indicate single line command means to execute
