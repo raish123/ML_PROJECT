@@ -5,7 +5,7 @@ import pymysql
 import pandas as pd
 from dotenv import load_dotenv
 import os,sys
-
+import dill
 load_dotenv()  # take environment variables from .env.
 
 host = os.getenv('host')
@@ -36,3 +36,15 @@ def read_data_sql():
     except Exception as e:
         raise CustomException(e,sys)
     
+
+
+def save_object(file_path,obj):
+    try:
+        logging.info('saving the filepath into artifacts folder')
+        if not os.path.exists('artifacts'):
+            os.makedirs('artifacts',exist_ok=True)
+
+        with open(file_path,'wb') as f:
+            dill.dump(obj,f)
+    except Exception as e:
+        raise CustomException(e,sys)
