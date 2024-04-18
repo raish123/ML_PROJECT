@@ -6,6 +6,14 @@ import pandas as pd
 from dotenv import load_dotenv
 import os,sys
 import dill
+from sklearn.metrics import r2_score,mean_squared_error
+
+
+
+
+
+
+
 load_dotenv()  # take environment variables from .env.
 
 host = os.getenv('host')
@@ -46,5 +54,38 @@ def save_object(file_path,obj):
 
         with open(file_path,'wb') as f:
             dill.dump(obj,f)
+    except Exception as e:
+        raise CustomException(e,sys)
+    
+
+
+def evaluate_model(x_train,y_train,x_test,y_test,models):
+    try:
+        report={}
+        for i in range(len(list(models))):
+                model = list(models.values())[i]
+                
+                #now training the model by 80% of train data
+                model.fit(x_train,y_train)
+                
+                print(list(models.keys())[i])
+                #predicting the output
+                
+                #now training the model by 80% of train_data and predicting the output variable
+                y_train_pred = model.predict(x_train)
+                #now testing the model by 20% of data and predicting the output variable
+                y_test_pred = model.predict(x_test)
+                
+                #finding the accuracy of training and testing score
+                training_score_model = model.score(x_train,y_train)
+                testing_score_model = model.score(x_test,y_test)
+
+                report[list(models.keys())[i]] = testing_score_model
+
+                return report
+                
+               
+        
+        
     except Exception as e:
         raise CustomException(e,sys)
